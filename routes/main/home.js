@@ -12,6 +12,8 @@ module.exports = function (req, res, next){
 		if(err){
 			return next(err);
 		}
-		res.json(docs);
+		res.render('main/main', {
+			names: docs
+		});
 	});
 };
