@@ -1,10 +1,17 @@
 module.exports = function (req, res, next){
 	async.waterfall([
 		function (cb){
+			models.test.create({
+				name: 'Simon'
+			}, cb);
+		},
+		function (test, cb){
 			models.test.findAll(cb);
 		}
 	], function (err, docs){
-		console.dir(docs);
-		res.send('Hello, World');
+		if(err){
+			return next(err);
+		}
+		res.json(docs);
 	});
 };
